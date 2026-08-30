@@ -11,3 +11,10 @@ Definition of Done: see README.md
 | US-05 | As a reader, I want to comment on a post, so that I can engage with the author | Medium | 3 | Backlog |
 | US-06 | As a reader, I want to follow an author, so that I see their new posts more prominently | Medium | 3 | Backlog |
 | US-07 | As an author, I want to see basic analytics on my posts, so that I understand my audience | Low | 5 | Backlog |
+| US-08 | As an author, I want to edit my published posts, so that I can fix errors or update content | Medium | 3 | Backlog |
+| US-09 | As a reader, I want to search posts by tags, so that I can quickly find topics of interest | Low | 5 | Backlog |
+
+## Story-Point Estimation Justification
+
+**US-08 (3 Story Points): Editing an existing post only requires fetching data already in the database and updating a form. It is a standard CRUD operation with moderate complexity, similar to user registration (US-01).
+**US-09 (5 Story Points): Searching by tags requires linking posts with tag categories in the database, writing dynamic filtering queries, and handling search results on the frontend. Because it involves database relationships and multi-component coordination, it requires higher effort similar to writing and publishing posts (US-03).
