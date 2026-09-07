@@ -15,3 +15,11 @@ Errors:
 
 ## GET /api/posts?page=n
 Success: 200 { posts: PostPublic[], page: number, hasMore: boolean }
+
+## POST /api/posts/:id/comments
+Request: { body: string }
+Success: 201 { comment: CommentPublic }
+Errors:
+    400 EMPTY_COMMENT "Comment content cannot be empty."
+    401 UNAUTHORIZED "Authentication required to post comments."
+    404 POST_NOT_FOUND "The requested post does not exist or is no longer accepting comments."
