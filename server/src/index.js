@@ -10,6 +10,7 @@ import healthRoutes from "./routes/health.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import "./events/listeners/log-published-posts.listener.js";
+import "./events/listeners/count-published-posts.listener.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;

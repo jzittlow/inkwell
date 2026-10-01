@@ -6,6 +6,7 @@
 
 import { Router } from "express";
 import { PostService } from "../services/post.service.js";
+import { getStats } from "../events/listeners/count-published-posts.listener.js";
 
 const router = Router();
 
@@ -27,6 +28,10 @@ router.get("/posts", async (req, res) => {
         ? await PostService.search({ query: search, page: Number(page) })
         : await PostService.listPublished({ page: Number(page) });
     res.status(200).json(result);
+});
+
+router.get("/stats", (req, res) => {
+    res.status(200).json(getStats());
 });
 
 export default router;
