@@ -11,6 +11,7 @@ class EmailAlreadyRegisteredError extends Error {}
 class WeakPasswordError extends Error {}
 class InvalidCredentialsError extends Error {}
 
+const BCRYPT_COST_FACTOR = 10; // see Lecture 15 for the security tradeoff this number encodes
 const MIN_PASSWORD_LENGTH = 8;
 
 export const AuthService = {
@@ -27,7 +28,7 @@ export const AuthService = {
             throw new WeakPasswordError();
         }
 
-        const passwordHash = await bcrypt.hash(password, 10);
+        const passwordHash = await bcrypt.hash(password, BCRYPT_COST_FACTOR);
         let user;
         try {
             user = await UserRepository.create({ email, displayName, passwordHash });
