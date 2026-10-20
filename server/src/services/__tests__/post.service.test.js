@@ -70,7 +70,7 @@ describe("PostService.search", () => {
         expect(result.hasMore).toBe(true);
     });
 
-    test("propagates strategy failure if underlying search mechanism fails (row 4)", async () => {
+    test("propagates strategy failure if underlying search mechanism fails (row 5)", async () => {
         mockSearchStrategy.search.mockRejectedValue(new Error("Search database offline"));
         await expect(
             PostService.search({ query: "crash test", page: 1 })
