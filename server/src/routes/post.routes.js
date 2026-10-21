@@ -23,11 +23,15 @@ router.post("/posts", async (req, res) => {
 });
 
 router.get("/posts", async (req, res) => {
-    const { page = 1, search } = req.query;
-    const result = search
-        ? await PostService.search({ query: search, page: Number(page) })
-        : await PostService.listPublished({ page: Number(page) });
-    res.status(200).json(result);
+    try {
+        const { page = 1, search } = req.query;
+        const result = search
+            ? await PostService.search({ query: search, page: Number(page) })
+            : await PostService.listPublished({ page: Number(page) });
+        res.status(200).json(result);
+    } catch (err) {
+        next(err);
+    }
 });
 
 router.get("/stats", (req, res) => {
