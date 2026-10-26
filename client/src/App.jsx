@@ -19,6 +19,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Feed />} />
                     <Route path="/write" element={<PostEditor />} />
+                    <Route path="/login" element={<LoginForm />} />
                 </Routes>
             </main>
         </BrowserRouter>
