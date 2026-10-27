@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "node --watch --env-file=.env src/index.js",
-    "test": "node --experimental-vm-modules --env-file=.env.test node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules --env-file=.env.test node_modules/jest/bin/jest.js --runInBand"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
