@@ -7,18 +7,24 @@
 import { Router } from "express";
 import { PostService } from "../services/post.service.js";
 import { getStats } from "../events/listeners/count-published-posts.listener.js";
+import { requireAuth } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
-router.post("/posts", async (req, res) => {
+router.post("/posts", requireAuth, async (req, res) => {
     try {
-        const { authorId, title, body } = req.body;
-        const post = await PostService.publish({ authorId, title, body });
+        // Never trust client-supplied identity fields — derive
+        // authorId from the authenticated request, not the request body.
+        const post = await PostService.publish({
+            ...req.body,
+            authorId: req.user.id, // set by requireAuth middleware from the verified JWT
+        });
         res.status(201).json(post);
     } catch (err) {
-        res.status(400).json({
-            error: { code: err.code || "VALIDATION_ERROR", message: err.message }
-        });
+        next(err);
+        //res.status(400).json({
+        //    error: { code: err.code || "VALIDATION_ERROR", message: err.message }
+        //});
     }
 });
 
