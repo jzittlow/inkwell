@@ -62,4 +62,12 @@ export const PostRepository = {
         const hasMore = rows.length > effectivePageSize;
         return { posts: rows.slice(0, effectivePageSize).map((post) => ({ ...post, author: toPublicUser(post.author) })), hasMore };
     },
+
+    findById(id) {
+        return prisma.post.findUnique({ where: { id} });
+    },
+
+    delete(id) {
+        return prisma.post.delete({ where: { id } });
+    }
 };
