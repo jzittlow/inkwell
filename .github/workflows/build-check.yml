@@ -34,7 +34,7 @@ jobs:
         # run would carry a deprecation warning.
 
       - name: Build the server Docker image
-        run: docker image inspect inkwell-server:ci --format 'Built {{.Id}} ({{.Architecture}}, {{.Size}} bytes)'
+        run: docker build -t inkwell-server:ci ./server
           # "docker image inspect" exits with an error if the image does not
           # exist, so this step genuinely fails when there is no image.
           # ("docker images" would not: it prints an empty table and still
