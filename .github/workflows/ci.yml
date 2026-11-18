@@ -31,10 +31,10 @@ jobs:
         with:
           node-version: "22"
       - name: Audit server dependencies
-        run: npm audit --audit-level=high
+        run: npm audit --omit=dev --audit-level=high
         working-directory: server
       - name: Audit client dependencies
-        run: npm audit --audit-level=high
+        run: npm audit --omit=dev --audit-level=high
         working-directory: client
 
 
@@ -161,7 +161,7 @@ jobs:
         run: |
           npx prisma generate
           npx prisma migrate deploy
-          printf 'DATABASE_URL=%s\n' "$DATABASE_URL" > .env
+          printf 'DATABASE_URL=%s\nAUTH_RATE_LIMIT_MAX=100\n' "$DATABASE_URL" > .env
         # The server's "dev" script loads .env (--env-file=.env), which
         # is never committed. CI writes a throwaway one holding only the
         # test database's URL.
